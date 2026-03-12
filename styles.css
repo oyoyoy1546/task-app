@@ -124,3 +124,35 @@ li {
     font-size: 1.1rem;
     outline: none;
 }
+
+/*Container for the dots*/
+.color-palette {
+    display: flex;
+    gap: 5px;
+    margin-right: 15px;
+}
+
+/*The actual dots*/
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.1s ease;
+}
+
+.color-dot:hover {
+    transform: scale(1.3);
+}
+
+/*Colors for the dots*/
+.color-default { background-color: #888; }
+.color-red     { background-color: #ff5f56; }
+.color-blue    { background-color: #2781ff; }
+.color-green   { background-color: #28c840; }
+
+/*The actual Task border colors*/
+.task-red   { border-left: 5px solid #ff5f56 !important; }
+.task-blue  { border-left: 5px solid #2781ff !important; }
+.task-green { border-left: 5px solid #28c840 !important; }
