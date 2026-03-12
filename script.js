@@ -56,7 +56,7 @@ function saveTasks() {
 
         if (spanText) {
 
-            const colorClasses = ['task-red', 'task-blue', 'task-green'];
+            const colorClasses = ['task-red', 'task-blue', 'task-green', 'task-yellow'];
             const activeColor = colorClasses.find(cls => li.classList.contains(cls)) || "";
         
         tasks.push ({
@@ -188,3 +188,4 @@ const span = li.querySelector('.task-text');
     });
     return li;
 }
+
