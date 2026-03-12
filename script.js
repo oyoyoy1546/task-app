@@ -154,8 +154,7 @@ const span = li.querySelector('.task-text');
         input.value = span.textContent;
         input.classList.add('edit-input');
 
-        li.insertBefore(input, span);
-        span.style.display = 'none';
+        span.replaceWith(input);
         input.focus();
 
         const saveEdit = () => {
@@ -163,8 +162,7 @@ const span = li.querySelector('.task-text');
             if (newText !== "") {
                 span.textContent = newText;
             }
-            span.style.display = "";
-            input.remove();
+            input.replaceWith(span);
             saveTasks();
         };
 
@@ -189,5 +187,4 @@ const span = li.querySelector('.task-text');
         }, 200);
     });
     return li;
-
 }
