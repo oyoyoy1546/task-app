@@ -55,14 +55,17 @@ function saveTasks() {
         const timeText = li.querySelector('.timestamp');
 
         if (spanText) {
-            const currentClass = Array.from(li.classList).find(c => c.startsWith('task-')) || "";
-        }
+
+            const colorClasses = ['task-red', 'task-blue', 'task-green'];
+            const activeColor = colorClasses.find(cls => li.classList.contains(cls)) || "";
+        
         tasks.push ({
             text: spanText.textContent,
             completed: li.classList.contains('completed'),
-            color: currentColor,
-            time: timeText
+            color: activeColor,
+            time: timeText ? timeText.textContent : ""
         });
+        }  
     });
 
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -186,4 +189,5 @@ const span = li.querySelector('.task-text');
         }, 200);
     });
     return li;
+
 }
