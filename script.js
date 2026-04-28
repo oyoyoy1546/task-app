@@ -1,11 +1,10 @@
-const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const themeToggle = document.getElementById('themeToggle');
 const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 savedTasks.forEach(task => {
-    const li = createTaskElement(task.text, task.completed, task.color, task.time);
+    const li = createTaskElement(task.text, task.completed, task.color, task.dueDate);
     taskList.appendChild(li);
 });
 updateCount();
@@ -52,7 +51,7 @@ function saveTasks() {
 
     document.querySelectorAll('#taskList li').forEach(li => {
         const spanText = li.querySelector('.task-text');
-        const timeText = li.querySelector('.timestamp');
+        const dateInput = li.querySelector('.due-date-picker');
 
         if (spanText) {
 
@@ -63,7 +62,7 @@ function saveTasks() {
             text: spanText.textContent,
             completed: li.classList.contains('completed'),
             color: activeColor,
-            time: timeText ? timeText.textContent : ""
+            dueDate: dateInput ? dateInput.value : ""
         });
         }  
     });
@@ -106,12 +105,7 @@ function createTaskElement(taskText, isCompleted = false, taskColor = "", timest
     if (isCompleted) li.classList.add('completed');
     if (taskColor) li.classList.add(taskColor);
 
-    const time = timestamp || new Date().toLocaleString([], {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
+    const time = (timestamp && timestamp !== "undefined") ? timestamp : "";
 
     li.innerHTML = `
     <div class="task-main" style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
@@ -125,9 +119,13 @@ function createTaskElement(taskText, isCompleted = false, taskColor = "", timest
         <button class="delete-btn">Delete</button>
     </div>
     <div class="task-footer">
-        <span class="timestamp">${time}</span>
+        <input type="date" class="due-date-picker" value="${time}">
     </div>
     `;
+
+    li.querySelector('.due-date-picker').addEventListener('change', () => {
+        saveTasks();
+    });
 
     li.querySelectorAll('.color-dot').forEach(dot => {
         dot.addEventListener('click', (e) => {
@@ -188,4 +186,3 @@ const span = li.querySelector('.task-text');
     });
     return li;
 }
-
