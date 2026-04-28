@@ -1,4 +1,3 @@
-/*Base Theme*/
 :root {
     --bg-color: #ffffff;
     --container-bg: #f9f9f9;
@@ -34,15 +33,31 @@ body {
 .container {
     background: var(--container-bg);
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
     padding: 2rem;
     border-radius: 20px;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
 }
 
+h1 {
+    margin-top: 0;
+    font-weight: 800;
+}
+
 /*Inputs & Buttons*/
-input {
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex: 1;
+}
+
+input, select {
     background: transparent;
     border: 1px solid var(--border-color);
     color: var(--text-color);
@@ -52,7 +67,7 @@ input {
     transition: border 0.2s;
 }
 
-input:focus {
+input:focus, select:focus {
     border-color: var(--text-color);
 }
 
@@ -75,21 +90,35 @@ button:active {
     transform: scale(0.95);
 }
 
-/*Task Items*/
+/*Task layout*/
+#taskList {
+    padding: 0;
+}
+
 li {
     list-style: none;
     background: var(--bg-color);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 15px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.task-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .task-text {
+    flex: 1;
     font-size: 1.1rem;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .completed .task-text {
@@ -97,42 +126,51 @@ li {
     opacity: 0.4;
 }
 
-.secondary-btn {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    margin-top: 10px;
+/*Date/Priority Styles*/
+/* Date Styles */
+.task-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+    align-items: center;
 }
 
-#themeToggle {
-    background: transparent;
+.due-date-picker {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
     border: 1px solid var(--border-color);
-    color: var(--text-color);
-    font-size: 0.8rem;
-    padding: 5px 10px;
-}
-
-/*Edit Input*/
-.edit-input {
-    flex: 1;
-    margin: 0 10px;
-    padding: 5px;
-    background: transparent;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    border-radius: 5px;
-    font-size: 1.1rem;
     outline: none;
 }
 
-/*Container for the dots*/
+.due-date-picker:hover {
+    border-color: var(--text-color);
+}
+
+.delete-btn {
+    background: transparent;
+    border: 1px solid #ff5f56;
+    color: #ff5f56;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    background: #ff5f56;
+    color: white;
+    opacity: 1;
+}
+
+/*Color Palette*/
 .color-palette {
     display: flex;
     gap: 5px;
-    margin-right: 15px;
 }
 
-/*The actual dots*/
 .color-dot {
     width: 12px;
     height: 12px;
@@ -146,13 +184,54 @@ li {
     transform: scale(1.3);
 }
 
-/*Colors for the dots*/
 .color-default { background-color: #888; }
 .color-red     { background-color: #ff5f56; }
 .color-blue    { background-color: #2781ff; }
 .color-green   { background-color: #28c840; }
 
-/*The actual Task border colors*/
-.task-red   { border-left: 5px solid #ff5f56 !important; }
-.task-blue  { border-left: 5px solid #2781ff !important; }
-.task-green { border-left: 5px solid #28c840 !important; }
+.task-red   { border-left: 6px solid #ff5f56 !important; }
+.task-blue  { border-left: 6px solid #2781ff !important; }
+.task-green { border-left: 6px solid #28c840 !important; }
+
+/*Theme Toggle*/
+#themeToggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+#statusContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.clear-btn {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+}
+
+/*Edit Input*/
+.edit-input {
+    flex: 1;
+    margin: 0 10px;
+    padding: 5px;
+    font-size: 1.1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    flex: 1;
+    margin: 0 10px;
+    padding: 5px;
+    font-size: 1.1rem;
+}
